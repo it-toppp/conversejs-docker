@@ -22,6 +22,9 @@ RUN echo "9b2e9bc45bd409e1414ecc3b653d341c271ef704  /tmp/punjab_v0.15.tar.gz" | 
 RUN tar xfv /tmp/punjab_v0.15.tar.gz
 RUN cd punjab-0.15 && python setup.py install
 
+COPY site.conf /etc/nginx/conf.d/
+RUN rm /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/example_ssl.conf
+
 COPY entrypoint /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint
 ENTRYPOINT /usr/local/bin/entrypoint
