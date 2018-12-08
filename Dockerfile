@@ -4,13 +4,11 @@ FROM nginx
 # the BOSH connection manager punjab (https://github.com/twonds/punjab)
 
 RUN apt-get update -y
-RUN apt-get install -y curl python-twisted python-openssl
+RUN apt-get install -y curl python-twisted python-openssl git
 
 WORKDIR /tmp
 
-RUN curl -L https://github.com/jcbrand/converse.js/archive/v0.9.5.tar.gz -o /tmp/conversejs_v0.9.5.tar.gz && \
-  echo "94ea63c2fea4fd73e0c3f9fc8f48f2373da8b631 /tmp/conversejs_v0.9.5.tar.gz" | sha1sum -c - && \
-  tar xfv /tmp/conversejs_v0.9.5.tar.gz && rm -f /tmp/conversejs_v0.9.5.tar.gz
+RUN git clone https://github.com/conversejs/converse.js.git
 
 RUN cp /tmp/converse.js-*/css/converse.min.css /usr/share/nginx/html/
 RUN cp /tmp/converse.js-*/builds/converse.min.js /usr/share/nginx/html/
